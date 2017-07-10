@@ -1,10 +1,11 @@
 {>"base" /}
 
 {<bodyContent} 
+{#data}
  <div id="wrapper">
 
       <div class="image-decorator">
-        <img alt="Image principale" id="example" src="uploads/1499685297354_nsw.png" />
+        <img alt="Image principale" id="example" src={imgsrc} />
       </div>
       <table>
         <tr>
@@ -15,4 +16,5 @@
       </table>
 
     </div>
+    {/data}
         {/bodyContent}
