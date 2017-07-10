@@ -1,0 +1,18 @@
+{>"base" /}
+
+{<bodyContent} 
+ <div id="wrapper">
+
+      <div class="image-decorator">
+        <img alt="Image principale" id="example" src="uploads/1499685297354_nsw.png" />
+      </div>
+      <table>
+        <tr>
+          <td class="actions">
+            <input type="button" class="btn btn-primary" id="btnView" value="Display areas" class="actionOn" />
+          </td>
+        </tr>
+      </table>
+
+    </div>
+        {/bodyContent}

@@ -1,0 +1,14 @@
+{>"base" /}
+
+{<bodyContent} 
+
+
+<form id="upload-widget" action="/fileupload" method="post" enctype="multipart/form-data" >
+    <input name="avatar" type="file" /><br/>
+  <input type="submit" class="btn btn-primary">
+ 
+</form>
+
+ 
+
+    {/bodyContent}
