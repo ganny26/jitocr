@@ -7,9 +7,13 @@ var TesseractClient = require('./api');
 const cons = require('consolidate');
 const dust = require('dustjs-linkedin');
 var path = require('path');
+var session = require('express-session');
 
 var app = express();
 
+app.use(session({
+  secret: 'jitocr'
+}))
 
 //view engine as dust
 app.engine('dust', cons.dust);
@@ -36,20 +40,39 @@ app.get('/', function(req, res,next) {
 });
 
 app.get('/crop',function(req,res){
-    res.render('crop');
+    var data = {
+        imgsrc: req.session.ocrdata
+    }
+   console.log('Crop Route',data);
+   console.log(req.session.ocrdata);
+    res.render('crop',{data:data});
 })
 
 app.post('/fileupload', upload.single('avatar'), function (req, res) {
+
     var result, payload;
+    console.log(req.file.filename);
+    var locallocation = 'uploads/' + req.file.filename;
+    req.session.ocrdata = locallocation;
     res.redirect('/crop');
-    // TesseractClient.doScan(req, res, function (data) {
-    //     if (data) {
-    //         TesseractClient.fetchDataByVision(req, res, function (data) {
-    //             res.send(data);
-    //         })
-    //     }
-    // });
+   
 });
+
+var cropPositions = [];
+app.get('/fetchData',function(req,res){
+    console.log('From Crop',req.query);
+    cropPositions = req.query;
+     TesseractClient.doScan(req, res, cropPositions,function (data) {
+        if (data) {
+            TesseractClient.fetchDataByVision(req, res, function (data) {
+                res.send(data);
+            })
+        }
+    });
+    
+
+
+})
 
 
 app.listen(8656,function(){
