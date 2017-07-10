@@ -125,17 +125,19 @@ function loop(filename, index, data) {
     });
 }
 
-exports.doScan = function (req, res, cb) {
-    var filePath = req.file.path;
+exports.doScan = function (req, res, position,cb) {
+
+    var filePath =position;
     var data;
     var imagePath = filePath;
     var processedImagePath = __dirname + '/processed/';
-    var cropPositions = [
-        { "x": 18, "y": 111, "width": 422, "height": 78 },
-        { "x": 716, "y": "135", "width": 205, "height": 44 },
-        { "x": 315, "y": 346, "width": 256, "height": 52 },
-        { "x": 209, "y": 78, "width": 241, "height": 34 }
-    ];
+    // var cropPositions = [
+    //     { "x": 18, "y": 111, "width": 422, "height": 78 },
+    //     { "x": 716, "y": "135", "width": 205, "height": 44 },
+    //     { "x": 315, "y": 346, "width": 256, "height": 52 },
+    //     { "x": 209, "y": 78, "width": 241, "height": 34 }
+    // ];
+    var cropPositions = position;
     for (var i = 0; i < cropPositions.length; i++) {
         loop(imagePath, i, cropPositions[i]);
     }
