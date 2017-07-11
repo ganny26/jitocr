@@ -54,3 +54,19 @@ function displayAreas(areas) {
 	})
 	console.log(vertexDetails);
 };
+
+//scan
+
+$('#btnScan').click(function(){
+	console.log('scanning');
+	$.ajax({
+		url:"scan",
+		type:"GET",
+		success:function(data){
+			console.log('scanned',data);
+		},
+		error:function(err){
+			console.log('error while scanning',err);
+		}
+	})
+})
