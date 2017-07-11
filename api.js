@@ -99,6 +99,7 @@ exports.process = function (req, res) {
 }
 
 function loop(filename, index, data) {
+    console.log("inside loop");
     var fileName = 'image' + index + '.jpg';
     var processedImagePath = __dirname + '/processed/';
     Jimp.read(filename).then(function (image) {
@@ -118,18 +119,19 @@ function loop(filename, index, data) {
                 this.bitmap.data[idx + 2] = 0
             }
         })
-        image.crop(parseInt(data.x), parseInt(data.y), data.width, data.height);
+        image.crop(parseInt(data.x), parseInt(data.y), parseInt(data.width), parseInt(data.height));
         image.write(processedImagePath + fileName);
     }).catch(function (err) {
         console.log(err);
     });
 }
 
-exports.doScan = function (req, res, position,cb) {
+exports.doScan = function (req, res, position,imglocation,cb) {
 
-    var filePath =position;
+    //var filePath = position;
     var data;
-    var imagePath = filePath;
+  //  var imagePath = filePath;
+    console.log('image path',imglocation);
     var processedImagePath = __dirname + '/processed/';
     // var cropPositions = [
     //     { "x": 18, "y": 111, "width": 422, "height": 78 },
@@ -137,9 +139,11 @@ exports.doScan = function (req, res, position,cb) {
     //     { "x": 315, "y": 346, "width": 256, "height": 52 },
     //     { "x": 209, "y": 78, "width": 241, "height": 34 }
     // ];
-    var cropPositions = position;
+    var cropPositions = position.vertex;
+    console.log(cropPositions.length);
     for (var i = 0; i < cropPositions.length; i++) {
-        loop(imagePath, i, cropPositions[i]);
+        console.log('for loop');
+        loop(imglocation, i, cropPositions[i]);
     }
     return cb(true);
 }
