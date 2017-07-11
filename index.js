@@ -20,6 +20,8 @@ app.engine('dust', cons.dust);
 app.set('view engine', 'dust');
 app.set('views', __dirname + '/views');
 
+app.set('port', (process.env.PORT || 8656));
+
 app.use(express.static(path.join(__dirname, '/')));
 
 var storage = multer.diskStorage({
@@ -59,22 +61,29 @@ app.post('/fileupload', upload.single('avatar'), function (req, res) {
 });
 
 var cropPositions = [];
+var imgPath = null;
 app.get('/fetchData',function(req,res){
     console.log('From Crop',req.query);
     cropPositions = req.query;
-     TesseractClient.doScan(req, res, cropPositions,function (data) {
+    imgPath = req.session.ocrdata;
+     TesseractClient.doScan(req, res, cropPositions,imgPath,function (data) {
         if (data) {
-            TesseractClient.fetchDataByVision(req, res, function (data) {
-                res.send(data);
-            })
+            res.send(true);
+            // TesseractClient.fetchDataByVision(req, res, function (data) {
+            //     res.send(data);
+            // })
         }
     });
-    
+})
 
+app.get('/scan',function(req,res){
+    TesseractClient.fetchDataByTesseract(req,res,function(result){
+        res.send(result);
+    });
 
 })
 
 
-app.listen(8656,function(){
-    console.log("server running on http://localhost:8656");
+app.listen(app.get('port'),function(){
+    console.log("server running on port",app.get('port'));
 });
