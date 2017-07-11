@@ -12,6 +12,9 @@
           <td class="actions">
             <input type="button" class="btn btn-primary" id="btnView" value="Display areas" class="actionOn" />
           </td>
+           <td class="actions">
+            <input type="button" class="btn btn-primary" id="btnScan" value="Scan Vertex" class="actionOn" />
+          </td>
         </tr>
       </table>
 
