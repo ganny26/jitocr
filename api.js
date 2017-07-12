@@ -133,12 +133,6 @@ exports.doScan = function (req, res, position,imglocation,cb) {
   //  var imagePath = filePath;
     console.log('image path',imglocation);
     var processedImagePath = __dirname + '/processed/';
-    // var cropPositions = [
-    //     { "x": 18, "y": 111, "width": 422, "height": 78 },
-    //     { "x": 716, "y": "135", "width": 205, "height": 44 },
-    //     { "x": 315, "y": 346, "width": 256, "height": 52 },
-    //     { "x": 209, "y": 78, "width": 241, "height": 34 }
-    // ];
     var cropPositions = position.vertex;
     console.log(cropPositions.length);
     for (var i = 0; i < cropPositions.length; i++) {
