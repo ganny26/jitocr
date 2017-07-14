@@ -50,8 +50,8 @@ app.get('/crop',function(req,res){
     res.render('crop',{data:data});
 })
 
+/**File upload**/
 app.post('/fileupload', upload.single('avatar'), function (req, res) {
-
     var result, payload;
     console.log(req.file.filename);
     var locallocation = 'uploads/' + req.file.filename;
@@ -82,7 +82,6 @@ app.get('/scan',function(req,res){
     });
 
 })
-
 
 app.listen(app.get('port'),function(){
     console.log("server running on port",app.get('port'));
