@@ -13,8 +13,7 @@ const visionClient = vision({
 });
 
 
-/*
- * 
+/* 
  * convert to greyscale
  */
 function convertToGreyScale(req, res, next) {
