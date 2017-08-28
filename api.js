@@ -12,7 +12,6 @@ const visionClient = vision({
     keyFilename: 'application_default_credentials.json'
 });
 
-
 /* 
  * convert to greyscale
  */
@@ -48,11 +47,10 @@ function convertToGreyScale(req, res, next) {
     return next();
 }
 
-
+/* crop position images */
 function cropImage(req, res, next) {
     var processedImagePath = './public/processed/';
     var greyscaleFileName = './public/processed/greyscale.jpg';
-    // var fileName = "0";
     var cropPositions = [
         { "x": 18, "y": 111, "width": 422, "height": 78 },
         { "x": 716, "y": "135", "width": 205, "height": 44 },
