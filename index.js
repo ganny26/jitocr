@@ -60,6 +60,7 @@ app.post('/fileupload', upload.single('avatar'), function (req, res) {
    
 });
 
+//tessseract call
 var cropPositions = [];
 var imgPath = null;
 app.get('/fetchData',function(req,res){
